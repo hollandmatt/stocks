@@ -23,7 +23,7 @@ StockDescription.propTypes = {
 const logoUrl = symbol =>
   `https://storage.googleapis.com/iex/api/logos/${symbol}.png`;
 
-const Logo = ({ symbol }) => (
+export const Logo = ({ symbol }) => (
   <img alt="company logo" className="logo" src={logoUrl(symbol)} />
 );
 

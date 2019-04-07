@@ -12,4 +12,10 @@ const getSingleStockDetails = symbol => {
   );
 };
 
-export { getAllStocks, getSingleStockDetails };
+const getSingleStockQuote = symbol => {
+  return fetch(`${BASE_URL}/stock/${symbol}/quote`).then(response =>
+    response.json()
+  );
+};
+
+export { getAllStocks, getSingleStockDetails, getSingleStockQuote };
