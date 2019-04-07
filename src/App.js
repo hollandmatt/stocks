@@ -7,13 +7,15 @@ import {
   getSingleStockDetails,
   getSingleStockQuote
 } from './api/Api';
+import _ from 'lodash';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       stocks: [],
-      currentSelection: undefined
+      currentSelectionDetails: undefined,
+      errorMessage: undefined
     };
     this.onChangeStockSelection = this.onChangeStockSelection.bind(this);
   }
@@ -26,10 +28,7 @@ class App extends Component {
 
   onChangeStockSelection(option) {
     if (option.value) {
-      const symbol = option.value.toUpperCase()
-      this.setState({
-        currentSelection: symbol
-      });  
+      const symbol = option.value.toUpperCase();
       getSingleStockDetails(symbol)
         .then(details => {
           getSingleStockQuote(symbol).then(quote => {
@@ -43,7 +42,7 @@ class App extends Component {
             });
           });
         })
-        .catch(error => {
+        .catch(() => {
           this.setState({
             errorMessage: `${symbol} is not a valid stock symbol.`,
             currentSelectionDetails: null
@@ -53,18 +52,13 @@ class App extends Component {
   }
 
   render() {
-    const {
-      stocks,
-      currentSelection,
-      currentSelectionDetails,
-      errorMessage
-    } = this.state;
+    const { stocks, currentSelectionDetails, errorMessage } = this.state;
     return (
       <div className="App">
         <StocksList
           stocks={stocks}
           onChange={this.onChangeStockSelection}
-          value={{ value: currentSelection }}
+          value={{ value: _.get(currentSelectionDetails, 'symbol') }}
         />
         <StockDescription
           details={currentSelectionDetails}

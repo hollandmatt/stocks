@@ -13,9 +13,14 @@ const StocksList = ({ stocks, onChange }) => {
     }),
     o => o.label
   );
-  return <Creatable options={options} 
-                    formatCreateLabel={input => `Load details for ${input}`}
-                    onChange={onChange} />;
+  return (
+    <Creatable
+      options={options}
+      placeholder="Select or enter a stock symbol..."
+      formatCreateLabel={input => `Load details for ${input}`}
+      onChange={onChange}
+    />
+  );
 };
 
 StocksList.propTypes = {
