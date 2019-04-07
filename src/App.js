@@ -25,26 +25,40 @@ class App extends Component {
   }
 
   onChangeStockSelection(option) {
-    this.setState({
-      currentSelection: option.value
-    });
     if (option.value) {
-      getSingleStockDetails(option.value).then(details => {
-        getSingleStockQuote(option.value).then(quote => {
+      const symbol = option.value.toUpperCase()
+      this.setState({
+        currentSelection: symbol
+      });  
+      getSingleStockDetails(symbol)
+        .then(details => {
+          getSingleStockQuote(symbol).then(quote => {
+            this.setState({
+              currentSelectionDetails: {
+                symbol: symbol,
+                price: quote.latestPrice,
+                description: details.description
+              },
+              errorMessage: null
+            });
+          });
+        })
+        .catch(error => {
           this.setState({
-            currentSelectionDetails: {
-              symbol: option.value,
-              price: quote.latestPrice,
-              description: details.description
-            }
+            errorMessage: `${symbol} is not a valid stock symbol.`,
+            currentSelectionDetails: null
           });
         });
-      });
     }
   }
 
   render() {
-    const { stocks, currentSelection, currentSelectionDetails } = this.state;
+    const {
+      stocks,
+      currentSelection,
+      currentSelectionDetails,
+      errorMessage
+    } = this.state;
     return (
       <div className="App">
         <StocksList
@@ -52,7 +66,10 @@ class App extends Component {
           onChange={this.onChangeStockSelection}
           value={{ value: currentSelection }}
         />
-        <StockDescription details={currentSelectionDetails} />
+        <StockDescription
+          details={currentSelectionDetails}
+          errorMessage={errorMessage}
+        />
       </div>
     );
   }

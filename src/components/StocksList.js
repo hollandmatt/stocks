@@ -1,16 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash'
-import Select from 'react-select';
+import _ from 'lodash';
+import Creatable from 'react-select/lib/Creatable';
 
 const StocksList = ({ stocks, onChange }) => {
-  const options = _.sortBy(stocks.map(stock => {
-    return {
-      value: stock.symbol,
-      label: stock.companyName
-    };
-  }), o => o.label);
-  return <Select options={options} onChange={onChange} />;
+  const options = _.sortBy(
+    stocks.map(stock => {
+      return {
+        value: stock.symbol,
+        label: stock.companyName
+      };
+    }),
+    o => o.label
+  );
+  return <Creatable options={options} 
+                    formatCreateLabel={input => `Load details for ${input}`}
+                    onChange={onChange} />;
 };
 
 StocksList.propTypes = {

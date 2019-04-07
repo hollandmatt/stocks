@@ -1,27 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const StockDescription = ({ details }) => {
+const StockDescription = ({ details, errorMessage }) => {
   if (details) {
     const { symbol, description, price } = details;
-  return (
-    <div>
-      <Logo symbol={symbol} />
-      <h3>Symbol</h3>
-      <p>{symbol}</p>
-      <h3>Current Stock Price</h3>
-      <p>{price} USD</p>
-      <h3>Description</h3>
-      <p>{description}</p>
-    </div>
-  );
+    return (
+      <div>
+        <Logo symbol={symbol} />
+        <h3>Symbol</h3>
+        <p>{symbol}</p>
+        <h3>Current Stock Price</h3>
+        <p>{price} USD</p>
+        <h3>Description</h3>
+        <p>{description}</p>
+      </div>
+    );
   } else {
-    return <div className="message">Select a stock to start.</div>
+    return (
+      <div className="message">
+        {errorMessage || 'Select a stock to start.'}
+      </div>
+    );
   }
 };
 
 StockDescription.propTypes = {
-  details: PropTypes.object
+  details: PropTypes.object,
+  errorMessage: PropTypes.string
 };
 
 const logoUrl = symbol =>

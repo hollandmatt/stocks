@@ -35,8 +35,15 @@ describe('StockDescription', () => {
 
   it('shows a message when no stock is selected yet', () => {
     const wrapper = mount(<StockDescription details={undefined} />);
-    expect(wrapper.text()).toMatch('Select a stock to start.')
-  })
+    expect(wrapper.text()).toMatch('Select a stock to start.');
+  });
+
+  it('shows the error message when one is supplied', () => {
+    const wrapper = mount(
+      <StockDescription details={undefined} errorMessage="there was an error" />
+    );
+    expect(wrapper.text()).toMatch('there was an error');
+  });
 });
 
 describe('Logo', () => {

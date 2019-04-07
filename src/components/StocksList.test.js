@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import StocksList from './StocksList';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Select from 'react-select';
+import Creatable from 'react-select/lib/Creatable';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -20,5 +20,5 @@ const stocks = [
 
 it('shows the select component', () => {
   const wrapper = mount(<StocksList stocks={stocks} onChange={() => {}} />);
-  expect(wrapper.find(Select).length).toBe(1);
+  expect(wrapper.find(Creatable).length).toBe(1);
 });
