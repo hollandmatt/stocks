@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const StockDescription = ({ details }) => {
-  const { symbol, description, price } = details
+  const { symbol, description, price } = details;
   return (
     <div>
       <h3>Symbol</h3>
@@ -12,11 +12,11 @@ const StockDescription = ({ details }) => {
       <h3>Description</h3>
       <p>{description}</p>
     </div>
-  )
-}
+  );
+};
 
 StockDescription.propTypes = {
   description: PropTypes.string
-}
+};
 
-export default StockDescription
+export default StockDescription;
