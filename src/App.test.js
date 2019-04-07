@@ -21,7 +21,7 @@ it('creates the dropdown list', () => {
   expect(wrapper.find(StocksList).length).toBe(1);
 });
 
-it('does not show the details as no selection has been made yet', () => {
+it('creates the description component', () => {
   const wrapper = mount(<App />);
-  expect(wrapper.find(StockDescription).length).toBe(0);
+  expect(wrapper.find(StockDescription).length).toBe(1);
 });

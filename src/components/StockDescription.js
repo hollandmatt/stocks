@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const StockDescription = ({ details }) => {
-  const { symbol, description, price } = details;
+  if (details) {
+    const { symbol, description, price } = details;
   return (
     <div>
       <Logo symbol={symbol} />
@@ -14,10 +15,13 @@ const StockDescription = ({ details }) => {
       <p>{description}</p>
     </div>
   );
+  } else {
+    return <div className="message">Select a stock to start.</div>
+  }
 };
 
 StockDescription.propTypes = {
-  details: PropTypes.object.isRequired
+  details: PropTypes.object
 };
 
 const logoUrl = symbol =>

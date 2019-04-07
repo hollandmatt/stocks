@@ -32,6 +32,11 @@ describe('StockDescription', () => {
     const wrapper = mount(<StockDescription details={details} />);
     expect(wrapper.text()).toMatch(details.description);
   });
+
+  it('shows a message when no stock is selected yet', () => {
+    const wrapper = mount(<StockDescription details={undefined} />);
+    expect(wrapper.text()).toMatch('Select a stock to start.')
+  })
 });
 
 describe('Logo', () => {

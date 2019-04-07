@@ -52,9 +52,7 @@ class App extends Component {
           onChange={this.onChangeStockSelection}
           value={{ value: currentSelection }}
         />
-        {currentSelectionDetails && (
-          <StockDescription details={currentSelectionDetails} />
-        )}
+        <StockDescription details={currentSelectionDetails} />
       </div>
     );
   }
