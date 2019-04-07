@@ -8,7 +8,7 @@ const StockDescription = ({ details }) => {
       <h3>Symbol</h3>
       <p>{symbol}</p>
       <h3>Current Stock Price</h3>
-      <p>{price}</p>
+      <p>{price} USD</p>
       <h3>Description</h3>
       <p>{description}</p>
     </div>

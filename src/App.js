@@ -9,6 +9,7 @@ class App extends Component {
     super();
     this.state = {
       stocks: [],
+      prices: {},
       currentSelection: undefined
     };
     this.onChangeStockSelection = this.onChangeStockSelection.bind(this);
@@ -17,6 +18,11 @@ class App extends Component {
   componentDidMount() {
     getAllStocks().then(stocks => {
       this.setState({ stocks });
+      const prices = {}
+      stocks.forEach(stock => {
+        prices[stock.symbol] = stock.latestPrice;
+      })
+      this.setState({ prices })
     });
   }
 
@@ -26,10 +32,11 @@ class App extends Component {
     });
     if (option.value) {
       getSingleStockDetails(option.value).then(details => {
+        const { prices } = this.state
         this.setState({
           currentSelectionDetails: {
             symbol: option.value,
-            price: 0,
+            price: prices[option.value],
             description: details.description
           }
         });
