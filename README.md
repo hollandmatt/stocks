@@ -13,7 +13,7 @@ npm start
 You can then open [http://localhost:3000/](http://localhost:3000) in a browser.
 
 Alternatively, you can view the app live, via [https://hollandmatt.github.io/stocks/](https://hollandmatt.github.io/stocks/
-)
+) - [Travis CI](https://travis-ci.org/) is used to keep this up to date.
 
 ## Testing
 
