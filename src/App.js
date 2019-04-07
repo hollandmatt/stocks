@@ -1,25 +1,50 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import StocksList from './components/StocksList'
+import StockDescription from './components/StockDescription'
+import { getAllStocks, getSingleStockDetails } from './api/Api'
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      stocks: [],
+      currentSelection: undefined
+    };
+    this.onChangeStockSelection = this.onChangeStockSelection.bind(this)
+  }
+
+  componentDidMount() {
+    getAllStocks().then(stocks => {
+      this.setState({ stocks })
+    })
+  }
+
+  onChangeStockSelection(option) {
+    this.setState({
+      currentSelection: option.value
+    })
+    if (option.value) {
+      getSingleStockDetails(option.value).then(details => {
+        this.setState({
+          currentSelectionDetails: {
+            symbol: option.value,
+            price: 0,
+            description: details.description
+          }
+        })
+      })
+    }
+  }
+
   render() {
+    const { stocks, currentSelection, currentSelectionDetails } = this.state
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <StocksList stocks={stocks} onChange={this.onChangeStockSelection} value={{value: currentSelection}}/>
+        { 
+          currentSelectionDetails && <StockDescription details={currentSelectionDetails}/>
+        }
       </div>
     );
   }
