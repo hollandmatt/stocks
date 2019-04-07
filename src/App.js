@@ -18,11 +18,11 @@ class App extends Component {
   componentDidMount() {
     getAllStocks().then(stocks => {
       this.setState({ stocks });
-      const prices = {}
+      const prices = {};
       stocks.forEach(stock => {
         prices[stock.symbol] = stock.latestPrice;
-      })
-      this.setState({ prices })
+      });
+      this.setState({ prices });
     });
   }
 
@@ -32,7 +32,7 @@ class App extends Component {
     });
     if (option.value) {
       getSingleStockDetails(option.value).then(details => {
-        const { prices } = this.state
+        const { prices } = this.state;
         this.setState({
           currentSelectionDetails: {
             symbol: option.value,
